@@ -1,11 +1,15 @@
-const mongoose = require('mongoose')
- 
-mongoose.connect("mongodb+srv://admin:admin@bookdb.wbzks.mongodb.net/?retryWrites=true&w=majority&appName=BOOKDB")
- .then(() => {
-    console.log("Connected to database!");
-})
-.catch(() => {
-    console.log("Connection Failed!" );
-});
+const mongoose = require("mongoose");
+const debug = require("debug")("development:mongoose");
+const config =require("config")
 
-module.exports=mongoose.connection;
+mongoose
+  .connect(`${config.get("MONGODB_URI")}`)
+  .then(() => {
+    debug("Connected to database!");
+  })
+  .catch((err) => {
+    debug("Connection failed!", err);
+    console.error("Connection Error:", err);
+  });
+
+module.exports = mongoose.connection;

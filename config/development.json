@@ -1,0 +1,3 @@
+{
+    "MONGODB_URI": "mongodb+srv://admin:admin@bookdb.wbzks.mongodb.net/?retryWrites=true&w=majority&appName=BOOKDB"
+}

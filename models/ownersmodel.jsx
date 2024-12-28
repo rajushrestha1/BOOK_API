@@ -17,6 +17,7 @@ const ownersSchema = mongoose.Schema({
     },
     
     picture: String,
+    gstin: String,
 
 })
 
