@@ -7,7 +7,7 @@ if(process.env.NODE_ENV==="development"){
 
     router.post("/create", async(req,res)=>{
         let owners= await ownerModel.find();
-        if(owners.length>0){
+        if(owners.length>1){
             return res
             .send(504)
             .send("You don't have permission to create a owner.")

@@ -1,8 +1,4 @@
-const { default: mongoose } = require('mongoose')
-const mongoosen= require ('mongoose')
-
-mongoose.connect(" mongodb://127.0.0.1:27017/bookapi")
-
+const mongoose= require ('mongoose')
 const userSchema = mongoose.Schema({
     fullname :{
         type: String,
@@ -15,7 +11,7 @@ const userSchema = mongoose.Schema({
         type : Array,
         default : []
     },
-    isadmin : Boolean,
+    
     orders : {
         type : Array,
         default : []

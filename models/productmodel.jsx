@@ -1,8 +1,4 @@
-const { default: mongoose } = require('mongoose')
-const mongoosen= require ('mongoose')
-
-
-
+const mongoose= require ('mongoose')
 const productSchema = mongoose.Schema({
     image: String,
     name: String,

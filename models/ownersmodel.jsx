@@ -1,7 +1,4 @@
-const { default: mongoose } = require('mongoose')
-const mongoosen= require ('mongoose')
-
-
+const mongoose= require ('mongoose')
 const ownersSchema = mongoose.Schema({
     fullname :{
         type: String,
