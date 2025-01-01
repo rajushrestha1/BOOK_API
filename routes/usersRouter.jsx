@@ -9,12 +9,9 @@ router.get('/', (req, res) => {
 router.post('/register', async (req, res) => {
     try {
         const { email, password, fullname } = req.body;
-        
-
+    
         bcrypt.genSalt(10, (err, salt) => {
-                    
-                
-                    
+               
                     bcrypt.hash(password, salt, (err, hash) => {
                         if (err) return res.send(err.message);
                         else res.send(hash);

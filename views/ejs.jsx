@@ -1,82 +1,68 @@
 import React, { useState } from 'react';
+import BookList from './components/BookList';
+import Cart from './components/Cart';
 
-function RegisterForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+const App = () => {
+  const [cart, setCart] = useState([]);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-
-    if (!email || !password || !confirmPassword) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    setError('');
-    setSuccess(true);
-    console.log('Registered with', email, password);
-    // You can make an API call here to register the user
+  const addToCart = (book) => {
+    setCart([...cart, book]);
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
-      {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
-      {success && <div className="text-green-500 text-sm mb-2">Registration Successful!</div>}
-      <form onSubmit={handleRegister}>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="w-full p-2 border border-gray-300 rounded-md"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-blue-600 text-white p-4 shadow-md">
+        <h1 className="text-2xl font-bold text-center">Book Store</h1>
+      </header>
+      <main className="container mx-auto p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <BookList addToCart={addToCart} />
+          <Cart cart={cart} />
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="w-full p-2 border border-gray-300 rounded-md"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            className="w-full p-2 border border-gray-300 rounded-md"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md">
-          Register
-        </button>
-      </form>
+      </main>
     </div>
   );
-}
+};
 
-export default RegisterForm;
+export default App;
+
+
+
+import React from 'react';
+
+const books = [
+  { id: 1, title: 'The Great Gatsby', price: 10.99 },
+  { id: 2, title: '1984', price: 8.99 },
+  { id: 3, title: 'To Kill a Mockingbird', price: 12.99 },
+];
+
+const BookList = ({ addToCart }) => {
+  return (
+    <div className="bg-white p-4 rounded-md shadow-md">
+      <h2 className="text-lg font-bold mb-4">Available Books</h2>
+      <ul>
+        {books.map((book) => (
+          <li
+            key={book.id}
+            className="flex justify-between items-center p-2 border-b last:border-none"
+          >
+            <div>
+              <h3 className="font-medium">{book.title}</h3>
+              <p className="text-sm text-gray-600">${book.price.toFixed(2)}</p>
+            </div>
+            <button
+              onClick={() => addToCart(book)}
+              className="bg-blue-500 text-white px-3 py-1 rounded-md"
+            >
+              Add to Cart
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default BookList;
+
+
