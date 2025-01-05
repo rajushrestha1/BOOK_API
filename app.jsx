@@ -1,6 +1,5 @@
 const express= require("express")
 const app = express()
-
 const cookieparser= require("cookie-parser")
 const path = require("path")
 const db=require("./config/mongoose-connection.jsx")
@@ -21,8 +20,6 @@ app.use(
     })
 )
 app.use(flash());
-
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true }))
 app.use(cookieparser())
