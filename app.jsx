@@ -25,11 +25,29 @@ app.use(express.urlencoded({extended: true }))
 app.use(cookieparser())
 app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
-
+app.set("views", path.join(__dirname, "views"))
 
 
 app.use("/owners", ownersRouter)
 app.use("/users", usersRouter)
 app.use("/products", productsRouter)
 
-app.listen(3000)
+
+app.get('/', (req, res) => {
+    const error = req.query.error || null; 
+    res.render('index', { error });
+  });
+
+  app.get('/admin', (req, res) => { 
+    res.render('admin.ejs');
+  });
+
+  app.get('/cart', (req, res) => { 
+    res.render('cart.ejs');
+  });
+
+
+
+app.listen(3000,()=>{
+    console.log("server is running on port 3000");
+})
