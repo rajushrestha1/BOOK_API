@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 
-
+app.use("/", indexRouter)
 app.use("/owners", ownersRouter)
 app.use("/users", usersRouter)
 app.use("/products", productsRouter)
@@ -45,7 +45,9 @@ app.get('/', (req, res) => {
   app.get('/cart', (req, res) => { 
     res.render('cart.ejs');
   });
-
+  app.get('/shop', (req, res) => { 
+    res.render('shop');
+  });
 
 
 app.listen(3000,()=>{

@@ -1,38 +1,42 @@
-const express=require('express');
+const express = require('express');
 const router = express.Router();
-const upload= require("../config/multer-config.jsx")
-const productModel = require("../models/productmodel.jsx")
+const upload = require("../config/multer-config.jsx");
+const productModel = require("../models/productmodel.jsx");
 
+router.post("/create", upload.single("image"), async (req, res) => {
+  try {
+    // Destructure the form data
+    const {
+      title,
+      price,
+      discount,
+      author,
+      genre,
+      publicationdate
+    } = req.body;
 
-router.post("/create", upload.single("image"), async(req,res) =>{
-try{
-    let{
-     image,
-     name,
-     price,
-     discount,
-     bgcolor,
-     panelcolor,
-     textcolor,
- } =req.body; 
+    // Ensure that an image is provided
+    if (!req.file) {
+      throw new Error("Image file is required.");
+    }
 
-let porduct= await productModel.create({
+    // Create product in the database
+    let product = await productModel.create({
+      image: req.file.buffer, // Store image as a buffer or a URL
+      title,
+      price,
+      discount,
+      author,
+      genre,
+      publicationdate
+    });
 
-    image: req.file.buffer,
-    name,
-    price,
-    discount,
-    bgcolor,
-    panelcolor,
-    textcolor,
+    // Send a success message with the product data to the admin page
+    req.flash("success", "Product created successfully.");
+    res.redirect("/owners/admin");  // You may also pass product details to a page for display
+  } catch (err) {
+    res.status(400).send(`Error: ${err.message}`);
+  }
 });
-req.flash("success", "Product created succesfully.")
-res.redirect("/owners/admin")
-}catch(err){
-    res.send(err.message)
-}
-    
-    
-})
 
-module.exports=router;
+module.exports = router;

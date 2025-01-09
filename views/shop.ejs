@@ -1,3 +1,5 @@
+<script src="https://cdn.tailwindcss.com"></script>
+
 <div class="w-full h-screen flex items-start px-20 py-20">
   <div class="w-[25%] flex h-screen flex-col items-start">
     <div class="flex items-center gap-2">
@@ -22,10 +24,10 @@
   </div>
   <div class="w-[75%] flex flex-col gap-5 h-screen">
     <div class="flex items-start gap-5">
-      <% products.forEach(function(product){ %>
+      <% product.forEach(function(product){ %>
       <div class="w-60">
         <div
-          class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]"
+          class="w-full h-52 flex items-center justify-center bg-[<%= product.author %>]"
         >
           <img
             class="h-[12rem]"
@@ -33,12 +35,12 @@
             alt=""
           />
         </div>
-        <div
-          class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]"
-        >
+        <div class="flex justify-between items-center px-4 py-4">
           <div>
-            <h3><%= product.name %></h3>
+            <h3><%= product.title %></h3>
             <h4>₹ <%= product.price %></h4>
+            <h5><%= product.genre %></h5>
+            <h6><%= product.publicationdate %></h6>
           </div>
           <a
             class="w-7 h-7 flex items-center justify-center rounded-full bg-white"

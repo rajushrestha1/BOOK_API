@@ -64,4 +64,20 @@ module.exports.loginUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
+
+
+  
 };
+
+// Logout User
+module.exports.logoutUser = async (req, res) => {
+  try {
+    // Clear the token cookie
+    res.clearCookie("token", { httpOnly: true, secure: true });
+
+    res.status(200).json({ message: "Logout successful" });
+  } catch (err) {
+    res.status(500).json({ error: "Server error during logout" });
+  }
+};
+
