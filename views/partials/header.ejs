@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="w-ful flex justify-between px-5 py-3">
+      <h3 class="text-xl">Book Store</h3>
+      <% var loggedin = typeof loggedin !=="undefined" ? loggedin : true %> <%
+      if (loggedin){ %>
+
+      <div class="flex gap-5">
+        <a href="">Shop</a>
+        <a href="">Cart</a>
+        <a href="">My Account</a>
+        <a class="text-red-600" href="/user/logout">Logout</a>
+      </div>
+
+      <% } %>
+    </nav>
+  </body>
+</html>
