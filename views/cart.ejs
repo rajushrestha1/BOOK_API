@@ -1,53 +1,72 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
-<%- include('./partials/header') %>
-
-<div class="w-full h-screen flex items-start px-20 py-20 gap-10">
-  <div class="w-[30%] rounded-md overflow-hidden">
-    <div class="w-full h-80 bg-yellow-500"></div>
-    <div class="w-full flex justify-between px-5 py-4">
-      <h3 class="text-2xl">Clinge Bag</h3>
+<%- include('./partials/header') %> <% user.cart.forEach(item => { %>
+<div
+  class="min-h-screen flex flex-wrap items-start px-5 md:px-20 py-10 gap-5 md:gap-10"
+>
+  <!-- Product Summary Section -->
+  <div class="md:w-[30%] rounded-md overflow-hidden shadow-lg bg-white">
+    <div class="w-full h-80 bg-yellow-500 bg-[<%= item.bgcolor %>]">
+      <img
+        class="object-cover w-full h-full"
+        src="data:image/jpeg;base64, <%= item.image.toString('base64') %>"
+        alt="Product Image"
+      />
+    </div>
+    <div
+      class="w-full flex justify-between px-5 py-4 bg-[<%= item.panelcolor %>]"
+    >
+      <h3 class="text-2xl font-semibold">Clinge Bag</h3>
       <div class="flex items-center gap-2">
-        <i
-          class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-add-line"
-        ></i>
-        <div class="px-2 py-1 rounded-md bg-white text-black">01</div>
-        <i
-          class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-subtract-line"
-        ></i>
+        <button
+          type="button"
+          class="w-7 h-7 bg-white flex rounded-full items-center justify-center border border-gray-300 hover:bg-gray-200"
+        >
+          <i class="ri-add-line"></i>
+        </button>
+        <div class="px-3 py-1 rounded-md bg-gray-100 text-black">01</div>
+        <button
+          type="button"
+          class="w-7 h-7 bg-white flex rounded-full items-center justify-center border border-gray-300 hover:bg-gray-200"
+        >
+          <i class="ri-subtract-line"></i>
+        </button>
       </div>
     </div>
-    <div class="flex items-center justify-between px-5 py-3">
-      <h4 class="text-lg">Net Total</h4>
-      <h2 class="text-lg">₹ 1200</h2>
+    <div
+      class="flex items-center justify-between px-5 py-3 bg-gray-50 bg-[<%= item.textcolor %>]"
+    >
+      <h4 class="text-lg font-medium">Net Total</h4>
+      <h2 class="text-lg font-semibold"><%= bill %></h2>
     </div>
   </div>
-  <div class="w-[70%]">
-    <h3 class="text-xl">Price Breakdown</h3>
-    <div class="px-10 mt-5">
-      <div class="flex mt-2">
-        <h4 class="w-1/3">Total MRP</h4>
-        <h4>₹ 1920</h4>
+
+  <!-- Price Breakdown Section -->
+  <div class="w-full md:w-[70%]">
+    <h3 class="text-xl font-semibold mb-5">Price Breakdown</h3>
+    <div class="px-5 md:px-10">
+      <div class="flex justify-between mt-2">
+        <h4 class="w-1/3 font-medium">Total MRP</h4>
+        <h4 class="font-medium"><%= item.price %></h4>
       </div>
-      <div class="flex mt-2">
-        <h4 class="w-1/3">Discount on MRP</h4>
-        <h4>₹ 0</h4>
+      <div class="flex justify-between mt-2">
+        <h4 class="w-1/3 font-medium">Discount on MRP</h4>
+        <h4 class="font-medium"><%= Number(item.discount) %></h4>
       </div>
-      <div class="flex mt-2">
-        <h4 class="w-1/3">Platform Fee</h4>
-        <h4>₹ 20</h4>
+      <div class="flex justify-between mt-2">
+        <h4 class="w-1/3 font-medium">Platform Fee</h4>
+        <h4 class="font-medium">₹ 20</h4>
       </div>
-      <div class="flex mt-2">
-        <h4 class="w-1/3">Shipping Fee</h4>
-        <h4>FREE</h4>
+      <div class="flex justify-between mt-2">
+        <h4 class="w-1/3 font-medium">Shipping Fee</h4>
+        <h4 class="font-medium text-green-600">FREE</h4>
       </div>
     </div>
-    <div class="w-full h-[1px] bg-black mt-10"></div>
-    <div class="flex mt-5">
-      <h3 class="w-1/3 text-xl">Total Amount</h3>
-      <h3 class="font-semibold text-xl text-green-600">₹ 1940</h3>
+    <div class="w-full h-[1px] bg-gray-300 mt-5"></div>
+    <div class="flex justify-between mt-5 px-5 md:px-10">
+      <h3 class="w-1/3 text-xl font-semibold">Total Amount</h3>
+      <h3 class="text-xl font-bold text-green-600"><%= bill %></h3>
     </div>
-    <form action=""></form>
   </div>
 </div>
-<%- include('./partials/footer') %>
+<% }) %> <%- include('./partials/footer') %>
